@@ -1,15 +1,16 @@
 -module(timeconver).
--export([main/1]).
+-export([main/0]).
 
-main(A) ->
-
-    AMIndex = string:str(Time, "AM"),
-    PMIndex = string:str(Time, "PM"),
-    if  AMIndex > 0 ->
-    	Res = convert_am(Time);
-        PMIndex > 0 -> 
-    	Res = convert_pm(Time)
-    end,
-
-    io:format("~s", [Res]),
+main() ->
+   
+    Arr = read_array(5, "~d"),
+    Sum = lists:foldl(fun(X, Acc) -> X+Acc end, 0, Arr),
+    Res = [ Sum - X || X <- Arr ],
+    io:format("~p ~p", [lists:min(Res), lists:max(Res)]),
     true.
+
+read_array(0,D) -> [];
+read_array(N,D) -> 
+   {ok, [X]} = io:fread("", D),
+   
+   [X | read_array(N-1,D)].

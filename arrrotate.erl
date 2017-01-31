@@ -4,16 +4,18 @@
 
 main(A, Q_list, [N, K, Q]) ->
 
-	Res = rotate(A, N, K),
+	Res = rotate(A, K, N),
 
-	print_nth(Res, Q_list),
-
+	lists:foreach( fun(Q0) ->
+            { ok, [M]} = io:fread("", "~d"),
+             io:format("~p~n", [lists:nth(M+1, Res)])
+    end,Q_list),
     true.
 
 
 
 print_nth(Arr, Q_list) -> 
-	lists:foreach( fun(N) -> io:format("~p~n", [lists:nth(N, Arr)]) end, Q_list).
+	lists:foreach( fun(N) -> io:format("~p~n", [lists:nth(N+1, Arr)]) end, Q_list).
 
 rotate(Arr, K, N) -> 
 
