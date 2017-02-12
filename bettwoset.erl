@@ -11,19 +11,22 @@ solve(M, N, A, B) ->
 
     if Head < Tail ->
         Range = lists:seq(Head, Tail),
-        length(lists:filter( fun(X) -> X end,  [ test(A, B, X) || X <- Range ]));
+        length(lists:filter( fun(X) -> X end, lists:map( test(A,B), Range) ));
 
     Head >= Tail -> 0
 
     end.
 
-test(A, B, Num) ->
+test(A, B) ->
 
-    SmRes = smaller_set(A, Num),
-    BgRes = bigger_set(B, Num),
+    fun (Num) ->
 
-    if SmRes and BgRes -> true;
-        true -> false
+        SmRes = smaller_set(A, Num),
+        BgRes = bigger_set(B, Num),
+
+        if SmRes and BgRes -> true;
+            true -> false
+        end
     end.
 
 smaller_set([], _) -> true;
