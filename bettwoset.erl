@@ -7,7 +7,7 @@
 solve(M, N, A, B) ->
 
     Head = lists:nth(M, A),
-    Tail = lists:nth(N, B),
+    Tail = lists:nth(1, B),
 
     if Head < Tail ->
         Range = lists:seq(Head, Tail),
